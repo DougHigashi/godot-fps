@@ -4,7 +4,7 @@ var body_to_move : KinematicBody = null
 
 export var move_accel = 1
 export var max_speed = 5
-export var sprint_speed = 2
+export var sprint_speed = 1.7
 var drag = 0.0 
 export var gravity = 60
 
@@ -40,10 +40,11 @@ func _physics_process(delta):
 		velocity += sprint_speed * cur_move_vec - velocity * Vector3(drag, 0, drag) + gravity * Vector3.DOWN * delta
 	else:
 		velocity += move_accel * cur_move_vec - velocity * Vector3(drag, 0, drag) + gravity * Vector3.DOWN * delta
+	
 	velocity = body_to_move.move_and_slide_with_snap(velocity, snap_vec, Vector3.UP)
 
 	sprinting = false
-	emit_signal("movement_info", velocity)
+	emit_signal("movement_info", velocity, sprinting)
 
 func freeze():
 	frozen = true
