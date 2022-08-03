@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/characters/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/characters/CharacterMover.gd" type="Script" id=2]
+[ext_resource path="res://src/characters/HealthManager.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
 
 [node name="Player" type="KinematicBody"]
-collision_layer = 3
+collision_layer = 6
+collision_mask = 3
 script = ExtResource( 1 )
 mouse_sens = 0.3
 
@@ -21,3 +23,6 @@ current = true
 
 [node name="CharacterMover" type="Spatial" parent="."]
 script = ExtResource( 2 )
+
+[node name="HealthManager" type="Spatial" parent="."]
+script = ExtResource( 3 )
