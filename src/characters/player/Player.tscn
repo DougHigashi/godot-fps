@@ -1,15 +1,21 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/characters/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/characters/CharacterMover.gd" type="Script" id=2]
+[ext_resource path="res://src/characters/player/WeaponManager.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
 
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="PrismMesh" id=3]
+
+[sub_resource type="SphereMesh" id=4]
+
 [node name="Player" type="KinematicBody"]
 collision_layer = 3
 script = ExtResource( 1 )
-mouse_sens = 0.3
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0 )
@@ -18,6 +24,24 @@ shape = SubResource( 1 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
 current = true
+
+[node name="WeaponManager" type="Spatial" parent="Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0 )
+script = ExtResource( 3 )
+
+[node name="Weapons" type="Spatial" parent="Camera/WeaponManager"]
+
+[node name="Knife" type="MeshInstance" parent="Camera/WeaponManager/Weapons"]
+transform = Transform( 0.228324, 0, 0, 0, 0.228324, 0, 0, 0, 0.228324, 0.558065, 1.25583, -1.467 )
+mesh = SubResource( 2 )
+
+[node name="Pistol" type="MeshInstance" parent="Camera/WeaponManager/Weapons"]
+transform = Transform( 0.228324, 0, 0, 0, 0.228324, 0, 0, 0, 0.228324, 0.558065, 1.25583, -1.467 )
+mesh = SubResource( 3 )
+
+[node name="Shotgun" type="MeshInstance" parent="Camera/WeaponManager/Weapons"]
+transform = Transform( 0.228324, 0, 0, 0, 0.228324, 0, 0, 0, 0.228324, 0.558065, 1.25583, -1.467 )
+mesh = SubResource( 4 )
 
 [node name="CharacterMover" type="Spatial" parent="."]
 script = ExtResource( 2 )
